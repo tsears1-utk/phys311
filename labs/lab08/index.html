@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab 8 — JavaScript Physics Engine Port</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header>
+      <p class="eyebrow">PHYSICS 311 · LAB 8</p>
+      <h1>Port Your Integrator to JavaScript</h1>
+      <p class="intro">A browser-based projectile simulation used to test vector math, coordinate transforms, fixed timesteps, interchangeable integrators, and agreement with the Lab 7 Python engine.</p>
+    </header>
+
+    <section class="card">
+      <div class="section-heading">
+        <h2>Live simulation</h2>
+        <p>Launch speed 20 m/s · launch angle 50° · gravity 9.81 m/s²</p>
+      </div>
+
+      <canvas id="sim" width="1000" height="560" aria-label="Animated projectile physics simulation"></canvas>
+
+      <div class="controls" aria-label="Simulation controls">
+        <label>Integrator
+          <select id="integrator">
+            <option value="euler-cromer" selected>Euler–Cromer</option>
+            <option value="verlet">Velocity Verlet</option>
+          </select>
+        </label>
+        <label>Fixed timestep DT
+          <select id="dt">
+            <option value="240">1/240 s</option>
+            <option value="120" selected>1/120 s</option>
+            <option value="60">1/60 s</option>
+            <option value="20">1/20 s (coarse)</option>
+          </select>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" id="fixedStep" checked>
+          Fixed timestep accumulator
+        </label>
+        <button id="pause">Pause</button>
+        <button id="reset" class="secondary">Reset</button>
+        <button id="coordinateDemo" class="secondary">Show coordinate demo</button>
+      </div>
+
+      <div class="controls validation-controls" aria-label="Validation controls">
+        <button id="selfTest" class="secondary">Run Vec2 self-test</button>
+        <button id="headless">Run headless 10 s test</button>
+        <button id="injectLag" class="warning">Inject 300 ms lag</button>
+      </div>
+      <p class="hint">Changing the integrator or DT resets the projectile. To compare timestep modes, reset before each run and try the lag button while the projectile is still in flight. Use “Show coordinate demo” to verify the required static circle and 1 m axis ticks.</p>
+    </section>
+
+    <section class="card">
+      <h2>Validation log</h2>
+      <p class="hint">The Vec2 tests run automatically on page load. The headless button also prints full-precision values to the browser Console.</p>
+      <pre id="log" aria-live="polite">Loading the physics engine...</pre>
+    </section>
+
+    <section class="card reading">
+      <h2>What to verify</h2>
+      <div class="checks">
+        <div><h3>Part A · vectors and coordinates</h3><p>Run the Vec2 self-test and confirm every operation passes. In the coordinate demo, the ground is at the bottom and the circle is centered at (2, 3) m with radius 0.3 m.</p></div>
+        <div><h3>Part B · projectile</h3><p>The fading trail follows a 20 m/s projectile launched at 50°. The HUD displays t, x, y, speed, KE, PE, and total energy to three decimals.</p></div>
+        <div><h3>Part C · cross-language checks</h3><p>Run the headless test for 1200 steps at 1/120 s and compare it with <code>validation/python_reference.py</code>. Use the fixed-step checkbox and lag button, then compare Euler–Cromer against Velocity Verlet at DT = 1/20 s.</p></div>
+      </div>
+    </section>
+
+    <footer>Run from VS Code using Live Server. ES modules will not load correctly from a file:// URL.</footer>
+  </main>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
