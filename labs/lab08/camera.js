@@ -1,6 +1,5 @@
 "use strict";
 
-// Convert physics coordinates (y up) to canvas pixels (y down).
 export class Camera {
   constructor(scale, originX, originY) {
     this.scale = scale;

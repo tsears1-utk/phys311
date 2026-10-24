@@ -36,7 +36,6 @@ function drawGrid(ctx, canvas, camera, spacing, digits = 0) {
 function drawAxes(ctx, canvas, camera, tickSpacing, digits = 0) {
   drawGrid(ctx, canvas, camera, tickSpacing, digits);
 
-  // Coordinate axes: y = 0 is the ground line and belongs at the canvas bottom.
   ctx.save();
   ctx.strokeStyle = "#5ca66b";
   ctx.lineWidth = 3;
@@ -62,7 +61,6 @@ export function drawCoordinateDemo(ctx, canvas) {
   const camera = new Camera(42, 62, canvas.height - 60);
   drawAxes(ctx, canvas, camera, 1, 0);
 
-  // Required static test: physics position (2, 3), radius 0.3 m.
   const x = camera.toScreenX(2);
   const y = camera.toScreenY(3);
   const r = camera.toScreenLen(0.3);
@@ -153,7 +151,6 @@ export function drawProjectile(ctx, canvas, world, settings) {
   ctx.lineWidth = 2;
   ctx.stroke();
 
-  // Velocity vector for a visual indication of direction and speed.
   const arrowScale = 0.35;
   const tipX = camera.toScreenX(body.pos.x + body.vel.x * arrowScale);
   const tipY = camera.toScreenY(body.pos.y + body.vel.y * arrowScale);

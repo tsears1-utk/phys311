@@ -23,7 +23,7 @@ export class Spring {
   apply() {
     const d = this.body.pos.sub(this.anchor);
     const L = d.length();
-    if (L === 0) return;                            // guard: avoid 0/0
+    if (L === 0) return;                          
     const stretch = L - this.restLength;
     this.body.force.addTo(d.mul(-this.k * stretch / L));
   }
