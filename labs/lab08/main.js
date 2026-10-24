@@ -1,11 +1,11 @@
 "use strict";
 
-import { Vec2 } from "./engine/vec2.js";
-import { Body } from "./engine/body.js";
-import { Gravity } from "./engine/forces.js";
-import { EulerCromer, VelocityVerlet } from "./engine/integrators.js";
-import { World } from "./engine/world.js";
-import { drawCoordinateDemo, drawProjectile } from "./render/renderer.js";
+import { Vec2 } from "./vec2.js";
+import { Body } from "./body.js";
+import { Gravity } from "./forces.js";
+import { EulerCromer, VelocityVerlet } from "./integrators.js";
+import { World } from "./world.js";
+import { drawCoordinateDemo, drawProjectile } from "./renderer.js";
 
 const G = 9.81;
 const V0 = 20.0;
@@ -41,7 +41,7 @@ function makeIntegrator(name) {
 function buildProjectile(methodName) {
   const projectileWorld = new World(makeIntegrator(methodName));
   const projectile = new Body({
-    m: 1.0,
+    mass: 1.0,
     pos: new Vec2(0.0, 0.0),
     vel: new Vec2(V0 * Math.cos(THETA), V0 * Math.sin(THETA)),
     radius: 0.3,

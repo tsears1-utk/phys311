@@ -3,15 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lab 8 — JavaScript Physics Engine Port</title>
+  <title>Lab 8 — JavaScript Physics Engine </title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main class="page">
     <header>
       <p class="eyebrow">PHYSICS 311 · LAB 8</p>
-      <h1>Port Your Integrator to JavaScript</h1>
-      <p class="intro">A browser-based projectile simulation used to test vector math, coordinate transforms, fixed timesteps, interchangeable integrators, and agreement with the Lab 7 Python engine.</p>
     </header>
 
     <section class="card">
@@ -59,17 +57,6 @@
       <p class="hint">The Vec2 tests run automatically on page load. The headless button also prints full-precision values to the browser Console.</p>
       <pre id="log" aria-live="polite">Loading the physics engine...</pre>
     </section>
-
-    <section class="card reading">
-      <h2>What to verify</h2>
-      <div class="checks">
-        <div><h3>Part A · vectors and coordinates</h3><p>Run the Vec2 self-test and confirm every operation passes. In the coordinate demo, the ground is at the bottom and the circle is centered at (2, 3) m with radius 0.3 m.</p></div>
-        <div><h3>Part B · projectile</h3><p>The fading trail follows a 20 m/s projectile launched at 50°. The HUD displays t, x, y, speed, KE, PE, and total energy to three decimals.</p></div>
-        <div><h3>Part C · cross-language checks</h3><p>Run the headless test for 1200 steps at 1/120 s and compare it with <code>validation/python_reference.py</code>. Use the fixed-step checkbox and lag button, then compare Euler–Cromer against Velocity Verlet at DT = 1/20 s.</p></div>
-      </div>
-    </section>
-
-    <footer>Run from VS Code using Live Server. ES modules will not load correctly from a file:// URL.</footer>
   </main>
   <script type="module" src="main.js"></script>
 </body>
