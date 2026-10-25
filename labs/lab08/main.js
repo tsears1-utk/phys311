@@ -41,7 +41,7 @@ function makeIntegrator(name) {
 function buildProjectile(methodName) {
   const projectileWorld = new World(makeIntegrator(methodName));
   const projectile = new Body({
-    m: 1.0,
+    mass: 1.0,
     pos: new Vec2(0.0, 0.0),
     vel: new Vec2(V0 * Math.cos(THETA), V0 * Math.sin(THETA)),
     radius: 0.3,

@@ -14,4 +14,12 @@ export class Body {
     this.fixed = fixed;
     this.trail = [];
   }
+
+  clearForce() {
+    this.force.zero();
+  }
+
+  kineticEnergy() {
+    return 0.5 * this.mass * this.vel.lengthSq();
+  }
 }
