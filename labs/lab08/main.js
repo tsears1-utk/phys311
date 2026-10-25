@@ -132,8 +132,7 @@ function frame(nowMs) {
 
   if (!paused) {
     if (fixedToggle.checked) {
-      // Fixed-timestep accumulator: clamp frame gaps, drain with a while loop,
-      // and render once after all physics steps for this display frame.
+      // Fixed-timestep accumulator
       const frameTime = Math.min(frameTimeRaw, MAX_FRAME);
       accumulator += frameTime;
       const dt = currentDT();
@@ -147,9 +146,7 @@ function frame(nowMs) {
         if (checkLanding()) break;
       }
     } else if (frameTimeRaw > 0) {
-      // Deliberately variable-step mode for Part C2 comparison.
-      // The safety clamp prevents a background-tab return from creating a
-      // single arbitrarily huge step; this remains one measured step per frame.
+      // Deliberately variable-step mode
       const variableDT = Math.min(frameTimeRaw, MAX_FRAME);
       world.step(variableDT);
       lastSteps = 1;
@@ -163,7 +160,6 @@ function frame(nowMs) {
   requestAnimationFrame(frame);
 }
 
-// ----------------------------- Part A -----------------------------
 function vec2SelfTest() {
   const a = new Vec2(3, 4);
   const b = new Vec2(1, -2);
@@ -208,7 +204,6 @@ function vec2SelfTest() {
   return allPass;
 }
 
-// ------------------------- Part C1 validation ----------------------
 function runHeadless(methodName = methodSelect.value) {
   // Independent world: no animation, no rendering, exactly 1200 steps.
   const validationWorld = buildProjectile(methodName);
@@ -250,7 +245,7 @@ function runHeadless(methodName = methodSelect.value) {
 window.runHeadless = runHeadless;
 window.runVec2SelfTest = vec2SelfTest;
 
-// ------------------------------- UI --------------------------------
+//UI
 pauseButton.addEventListener("click", () => {
   if (!staticMode && !finished) {
     paused = !paused;
@@ -299,7 +294,6 @@ document.getElementById("injectLag").addEventListener("click", () => {
   log("Lag injection complete. Observe the trajectory and E_total HUD, then reset and compare the other timestep mode.");
 });
 
-// Start with the animated projectile and a visible Vec2 test.
 resetSimulation();
 vec2SelfTest();
 requestAnimationFrame(frame);
