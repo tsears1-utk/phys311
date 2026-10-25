@@ -41,7 +41,7 @@ function makeIntegrator(name) {
 function buildProjectile(methodName) {
   const projectileWorld = new World(makeIntegrator(methodName));
   const projectile = new Body({
-    mass: 1.0,
+    m: 1.0,
     pos: new Vec2(0.0, 0.0),
     vel: new Vec2(V0 * Math.cos(THETA), V0 * Math.sin(THETA)),
     radius: 0.3,
@@ -163,6 +163,7 @@ function frame(nowMs) {
   requestAnimationFrame(frame);
 }
 
+// ----------------------------- Part A -----------------------------
 function vec2SelfTest() {
   const a = new Vec2(3, 4);
   const b = new Vec2(1, -2);
@@ -207,7 +208,7 @@ function vec2SelfTest() {
   return allPass;
 }
 
-// Part C1 validation 
+// ------------------------- Part C1 validation ----------------------
 function runHeadless(methodName = methodSelect.value) {
   // Independent world: no animation, no rendering, exactly 1200 steps.
   const validationWorld = buildProjectile(methodName);
@@ -242,12 +243,14 @@ function runHeadless(methodName = methodSelect.value) {
   }
   log("Compare these numbers with validation/python_reference.py using the Lab 7 engine.");
 
+  // Make the function callable from the browser Console as required by the lab.
   return result;
 }
 
 window.runHeadless = runHeadless;
 window.runVec2SelfTest = vec2SelfTest;
 
+// ------------------------------- UI --------------------------------
 pauseButton.addEventListener("click", () => {
   if (!staticMode && !finished) {
     paused = !paused;
@@ -291,11 +294,12 @@ document.getElementById("injectLag").addEventListener("click", () => {
   log(`Injecting ${stallMs} ms of main-thread lag. Current mode: ${fixedToggle.checked ? "fixed accumulator" : "variable frame dt"}.`);
   const start = performance.now();
   while (performance.now() - start < stallMs) {
-    // Intentional wait for the Lab 8 timestep comparison.
+    // Intentional busy-wait for the Lab 8 timestep comparison.
   }
   log("Lag injection complete. Observe the trajectory and E_total HUD, then reset and compare the other timestep mode.");
 });
 
+// Start with the animated projectile and a visible Vec2 test.
 resetSimulation();
 vec2SelfTest();
 requestAnimationFrame(frame);
