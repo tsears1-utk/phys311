@@ -1,0 +1,5 @@
+{
+  "type": "module",
+  "private": true,
+  "description": "Lab 9 modular multi-body JavaScript physics engine"
+}

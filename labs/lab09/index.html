@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab 9 — Multi-Body Browser Physics Engine</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header>
+      <p class="eyebrow">PHYSICS 311 · LAB 9</p>
+      <h1>Multi-Body Browser Simulation</h1>
+    </header>
+
+    <section class="card">
+      <div class="section-heading">
+        <h2>Simulation</h2>
+      </div>
+      <canvas id="sim" width="1120" height="650" aria-label="Multi-body physics simulation"></canvas>
+
+      <div class="controls" aria-label="Simulation controls">
+        <label>Scene
+          <select id="scene">
+            <option value="ballpit" selected>1 — Billiards / ball pit</option>
+            <option value="nbody">2 — Gravitational N-body</option>
+            <option value="spring">3 — Damped spring-mass array</option>
+          </select>
+        </label>
+        <label>Integrator
+          <select id="integrator">
+            <option value="euler-cromer" selected>Euler-Cromer</option>
+            <option value="verlet">Velocity Verlet</option>
+          </select>
+        </label>
+        <label>Fixed timestep
+          <select id="dt">
+            <option value="0.016666666666666666">1/60 s</option>
+            <option value="0.008333333333333333" selected>1/120 s</option>
+            <option value="0.004166666666666667">1/240 s</option>
+          </select>
+        </label>
+        <label>Restitution e: <span id="restitutionValue">1.00</span>
+          <input id="restitution" type="range" min="0.50" max="1.00" step="0.05" value="1.00">
+        </label>
+        <button id="pause">Pause</button>
+        <button id="reset" class="secondary">Reset scene</button>
+      </div>
+
+      <div class="controls validation-controls">
+        <button id="jitter" class="warning">Disable guard (jitter demo)</button>
+        <button id="runTests" class="secondary">Run 20-body conservation tests</button>
+        <button id="runOrbitTest" class="secondary">Run 60 s N-body test</button>
+        <button id="benchmark" class="secondary">Run performance benchmark</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Diagnostics and test output</h2>
+      <p class="hint">The canvas HUD reports time, body count, total energy, fractional energy drift, momentum magnitude, FPS, physics time, and rendering time. Run the validation buttons to print the 60-second tests and performance table below.</p>
+      <pre id="log" aria-live="polite">Loading Lab 9 engine...</pre>
+    </section>
+
+    <section class="card reading">
+      <h2>Scene guide</h2>
+      <div class="checks">
+        <div><h3>Scene 1 — Collisions</h3><p>Twenty-four circles collide with one another, the box walls, and an immovable circular obstacle. Change e to compare elastic and inelastic impacts.</p></div>
+        <div><h3>Scene 2 — N-body gravity</h3><p>A central star and four orbiting bodies interact through softened NewtonGravity. Use Velocity Verlet and run the 60-second stability test.</p></div>
+        <div><h3>Scene 3 — Spring system</h3><p>Four masses move under gravity, quadratic drag, and individual spring forces. Their mechanical energy should decrease because drag dissipates energy.</p></div>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
